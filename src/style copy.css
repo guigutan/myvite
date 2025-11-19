@@ -24,12 +24,10 @@ a:hover {
 
 body {
   margin: 0;
-  /* display: flex; */
-  /* place-items: center;  */
-  /* min-width: 320px; */
-  /* min-height: 100vh; */
-
-   overflow-y: overlay; /* 滚动条悬浮，不占视口宽度 */
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
 h1 {
@@ -60,30 +58,12 @@ button:focus-visible {
   padding: 2em;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-}
 #app {
-  display: flex; 
+  max-width: 1280px;
+  margin: 0 auto; 
+  padding: 2rem;
+  text-align: center;
 }
-#app .left{
-  width: 10%;
-  height: 100vh;   
-  overflow: auto;
-  background-color: #F6F6F7;  
-  border-right: 1px solid  #d6d4d4;
-}
-#app .right{
-  width: 90%;
-  height: 100vh;   
-  overflow: auto;
-  background-color: #fff;
-}
-
-
-
-
 
 @media (prefers-color-scheme: light) {
   :root {
