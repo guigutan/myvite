@@ -13,11 +13,24 @@ mkdir backend && cd backend
 npm init -y
 npm install <mark>express</mark> <mark>mysql2</mark> <mark>cors</mark> <mark>dotenv</mark>
 
-启动后端：node server.js
-
 ---
 
+cd D:\www\myvite\backend
 
+1. 先卸载有问题的类型包（很多人装了它才出问题）
+
+npm uninstall <mark>@types/express</mark> <mark>@types/cors</mark>
+
+2. 确保这些依赖装好了
+
+npm install express mysql2 cors
+npm install -D typescript ts-node
+
+启动
+
+npx ts-node server.ts
+
+---
 
 MaraDB数据库
 
