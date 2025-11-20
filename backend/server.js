@@ -1,31 +1,36 @@
-const express = require('express')
-const mysql = require('mysql2')
-const cors = require('cors')
-require('dotenv').config()
+// backend/server.js  (改成 ESM 写法)
+import express from 'express';
+import mysql from 'mysql2';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
-const app = express()
-app.use(cors())
-app.use(express.json())
+dotenv.config();
 
-const db = mysql.createPool({
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  password: '你的密码',
-  database: '你的数据库名'
-})
+  password: 'Aa111111',
+  database: 'myvite_db',
+  waitForConnections: true,
+  connectionLimit: 10,
+});
 
-// 示例：条码追溯查询
-app.post('/api/smom', (req, res) => {
-  const { barcode } = req.body
-  const sql = `SELECT * FROM smom_trace WHERE barcode LIKE ? LIMIT 50`
-  db.query(sql, [`%${barcode}%`], (err, results) => {
-    if (err) return res.status(500).json({ error: err.message })
-    res.json({ data: results })
-  })
-})
-
-// 你可以继续加 /api/rpa-prepay 等接口
+app.post('/api/query/smom', (req, res) => {
+  const { barcode } = req.body;
+  const sql = 'SELECT * FROM smom_trace WHERE barcode LIKE ? LIMIT 100';
+  pool.query(sql, [`%${barcode || ''}%`], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ success: false, message: '查询失败' });
+    }
+    res.json({ success: true, data: results });
+  });
+});
 
 app.listen(3000, () => {
-  console.log('后端运行在 http://localhost:3000')
-})
+  console.log('后端运行在 http://localhost:3000');
+});
