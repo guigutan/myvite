@@ -51,3 +51,36 @@ INSERT INTO smom_trace (barcode, status) VALUES
 
 SELECT * FROM smom_trace
 ```
+
+---
+
+### TypeScript 类型检查
+
+在 backend 目录下单独建一个 tsconfig.json
+
+```ts
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "noImplicitAny": false               // ← 这行关掉 any 报错（最舒服）
+  },
+  "include": ["server.ts"]
+}
+```
+
+安装必要的类型包（只运行一次）
+
+cd D:\www\myvite\backend
+
+npm install express mysql2 cors
+npm install -D typescript ts-node @types/express @types/cors @types/node
+
+----

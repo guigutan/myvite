@@ -1,4 +1,4 @@
-// backend/server.ts   ← 完整修正版，直接复制覆盖
+// backend/server.ts
 import express from 'express';
 import mysql from 'mysql2/promise';
 import cors from 'cors';
@@ -7,9 +7,20 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ↓↓↓ 改成下面这种写法，就永远不会再报错了 ↓↓↓
+// 创建连接池
+const pool = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  password: 'Aa111111',      // ← 改成你自己的密码
+  database: 'myvite_db',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
+
+// SMOM 查询接口
 app.post('/api/query/smom', async (req, res) => {
-  const { barcode } = req.body as { barcode?: string };
+  const { barcode } = req.body as { barcode?: string };  // 断言解决 any
 
   try {
     const [rows] = await pool.query(
@@ -17,19 +28,10 @@ app.post('/api/query/smom', async (req, res) => {
       [`%${barcode || ''}%`]
     );
     res.json({ success: true, data: rows });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, message: '查询失败' });
+  } catch (err: any) {
+    console.error('查询错误:', err);
+    res.status(500).json({ success: false, message: err.message || '查询失败' });
   }
-});
-
-const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'Aa111111',   // ← 改成你自己的
-  database: 'myvite_db',
-  waitForConnections: true,
-  connectionLimit: 10,
 });
 
 app.listen(3000, () => {
