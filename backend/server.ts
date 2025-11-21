@@ -34,6 +34,48 @@ app.post('/api/query/smom', async (req, res) => {
   }
 });
 
+// RPA 预付流程查询接口
+app.post('/api/query/rpa-prepay', async (req, res) => {
+  const { orderNo, startDate, endDate } = req.body as { 
+    orderNo?: string;
+    startDate?: string;
+    endDate?: string;
+  };
+
+  try {
+    let sql = 'SELECT * FROM rpa_prepay WHERE 1=1';
+    const params: any[] = [];
+
+    if (orderNo) {
+      sql += ' AND order_no LIKE ?';
+      params.push(`%${orderNo}%`);
+    }
+    if (startDate) {
+      sql += ' AND create_time >= ?';
+      params.push(startDate);
+    }
+    if (endDate) {
+      sql += ' AND create_time < DATE(? ) + INTERVAL 1 DAY';
+      params.push(endDate);
+    }
+
+    const [rows] = await pool.query(sql + ' ORDER BY create_time DESC LIMIT 200', params);
+
+    // ←←←← 新增这三行，解决所有数字问题！ ←←←←
+    const formattedRows = (rows as any[]).map(row => ({
+      ...row,
+      amount: parseFloat(row.amount as string) || 0
+    }));
+
+    res.json({ success: true, data: formattedRows });
+  } catch (err: any) {
+    console.error('RPA预付查询失败:', err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+
+
 app.listen(3000, () => {
   console.log('后端运行在 http://localhost:3000');
 });
