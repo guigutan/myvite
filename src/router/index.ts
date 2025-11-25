@@ -15,6 +15,7 @@ const router = createRouter({
         { path: '/smom', component: SmomQuery, name: 'smom' },
         { path: '/rpa-prepay', component: RpaPrepayQuery, name: 'rpa-prepay' },
         { path: '/rpa-cod', component: RpaCodQuery, name: 'rpa-cod' },
+        
 
        
 
