@@ -1,6 +1,6 @@
 <template>
   <div class="query-container">
-    <h2>条码追溯（SMOM）</h2>
+    <h2>条码追溯（codeKSMES）</h2>
     
     <div class="query-form">
       <input v-model="barcode" placeholder="输入条码（支持模糊查询）" @keyup.enter="query" />
@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { querySmom, type SmomRow } from '@/api/query';
+import { querySmom, type SmomRow } from '@/api/mes/codeKSMES';
 
 const barcode = ref('');
 const data = ref<SmomRow[]>([]);

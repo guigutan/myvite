@@ -1,6 +1,6 @@
 <template>
   <div class="query-container">
-    <h2>RPA 预付流程查询</h2>
+    <h2>RPA 到付流程查询ZF004</h2>
     
     <div class="query-form">
       <input v-model="orderNo" placeholder="订单号（支持模糊）" />
@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { queryRpaPrepay, type RpaPrepayRow } from '@/api/query';
+import { queryRpaPrepay, type RpaPrepayRow } from '@/api/rpa/ZF004';
 
 const orderNo = ref('');
 const startDate = ref('');
