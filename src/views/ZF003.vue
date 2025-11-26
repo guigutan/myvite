@@ -34,18 +34,18 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { queryRpaPrepay, type RpaPrepayRow } from '@/api/rpa/ZF003';
+import { queryZF003, type ZF003Row } from '@/api/rpa/ZF003';
 
 const orderNo = ref('');
 const startDate = ref('');
 const endDate = ref('');
-const data = ref<RpaPrepayRow[]>([]);
+const data = ref<ZF003Row[]>([]);
 const loading = ref(false);
 
 const query = async () => {
   loading.value = true;
   try {
-    const res = await queryRpaPrepay({
+    const res = await queryZF003({
       orderNo: orderNo.value,
       startDate: startDate.value,
       endDate: endDate.value

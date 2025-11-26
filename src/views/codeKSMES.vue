@@ -29,16 +29,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { querySmom, type SmomRow } from '@/api/mes/codeKSMES';
+import { queryCodeKS, type CodeKSRow } from '@/api/mes/codeKSMES';
 
 const barcode = ref('');
-const data = ref<SmomRow[]>([]);
+const data = ref<CodeKSRow[]>([]);
 const loading = ref(false);
 
 const query = async () => {
   loading.value = true;
   try {
-    const res = await querySmom(barcode.value);
+    const res = await queryCodeKS(barcode.value);
     if (res.data.success) {
       data.value = res.data.data;
     } else {

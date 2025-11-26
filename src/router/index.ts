@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import MainLayout from '@/views/Layout/MainLayout.vue'
+import MainLayout from '@/views/layout/MainLayout.vue'
 import codeKSMES from '@/views/codeKSMES.vue'
 import codeSMOM from '@/views/codeSMOM.vue'
 import ZF003 from '@/views/ZF003.vue'

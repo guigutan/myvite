@@ -1,7 +1,7 @@
 import { api } from '@/api/config'
 
 // SMOM 接口相关类型（和接口放一起）
-export interface SmomRow {
+export interface CodeKSRow {
   id: number;
   barcode: string;
   status: string;
@@ -9,5 +9,5 @@ export interface SmomRow {
 }
 
 // SMOM 条码查询接口
-export const querySmom = (barcode: string) => 
-  api.post<{ success: boolean; data: SmomRow[] }>('/mes/codeKSMES', { barcode });
+export const queryCodeKS = (barcode: string) => 
+  api.post<{ success: boolean; data: CodeKSRow[] }>('/mes/codeKSMES', { barcode });
