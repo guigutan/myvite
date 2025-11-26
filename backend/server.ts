@@ -18,8 +18,8 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// SMOM 查询接口
-app.post('/api/query/smom', async (req, res) => {
+// codeKSMES 查询接口
+app.post('/api/mes/codeKSMES', async (req, res) => {
   const { barcode } = req.body as { barcode?: string };  // 断言解决 any
 
   try {
@@ -35,7 +35,7 @@ app.post('/api/query/smom', async (req, res) => {
 });
 
 // RPA 预付流程查询接口
-app.post('/api/query/rpa-prepay', async (req, res) => {
+app.post('/api/rpa/ZF003', async (req, res) => {
   const { orderNo, startDate, endDate } = req.body as { 
     orderNo?: string;
     startDate?: string;

@@ -2,7 +2,7 @@
   <div class="main-container">
     <LeftMenu />
     <div class="right-content">
-      <router-view />   <!-- 这里会自动切换 SmomQuery，RPA 等等页面 -->
+      <router-view />
     </div>
   </div>
 </template>

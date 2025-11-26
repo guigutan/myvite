@@ -2,9 +2,10 @@
   <div class="left-menu">
     <h3>查询系统</h3>
     <ul>
-      <li><router-link to="/smom">条码追溯（SMOM）</router-link></li>
-      <li><router-link to="/rpa-prepay">RPA 预付流程</router-link></li>
-      <li><router-link to="/rpa-cod">RPA 到付流程</router-link></li>
+      <li><router-link to="/codeKSMES">条码追溯（KSMES）</router-link></li>
+      <li><router-link to="/codeSMOM">条码追溯（SMOM）</router-link></li>
+      <li><router-link to="/ZF003">RPA预付流程ZF003</router-link></li>
+      <li><router-link to="/ZF004">RPA预付流程ZF004</router-link></li>
       <!-- 以后继续加 -->
     </ul>
   </div>
